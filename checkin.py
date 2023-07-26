@@ -22,15 +22,25 @@ def signin():
     print("登陆成功")
     sleep(5)
 
-    browser.find_element(by=By.XPATH, value='//*[@id="email"]').send_keys(os.environ.get('EMAIL')) # 输入框
-    browser.find_element(by=By.XPATH, value='//*[@id="passwd"]').send_keys(os.environ.get('PASSWD'))
+    username = os.environ.get('EMAIL')
+    passwd = os.environ.get('PASSWD')
+    browser.find_element(by=By.XPATH, value='//*[@id="email"]').send_keys(username) # 输入框
+    browser.find_element(by=By.XPATH, value='//*[@id="passwd"]').send_keys(passwd)
     browser.find_element(by=By.XPATH, value='//*[@id="formLogin"]/div[3]/div/div/span/button').click() # 点击登陆按钮
 
     # 进行签到
     sleep(5)
     browser.find_element(by=By.XPATH, value='//*[@id="app"]/section/section/main/div/div[2]/div/div/div/div[2]/div[3]'
-    '/div/div/button[1]').click() # 点击签到
-    print("签到成功")
+                         '/div/div/button[1]').click() # 点击签到
+
+    # 检查签到是否成功
+    result_info = browser.find_element(by=By.XPATH, value='//*[@id="app"]/section/section/main/div/div[2]/div/div/'
+                                       'div/div[2]/div[3]/div/div/div[3]/div[2]').text
+    if browser.find_element(by=By.XPATH, value='//*[@id="app"]/section/section/main/div/div[2]/div/div/div/div[2]/'
+                             'div[3]/div/div/button[1]/span').text == '今日已签到':
+        print("签到失败：今日已签到，", result_info)
+    else:
+        print("签到成功：", result_info)
 
     # 停止爬虫
     browser.quit()
@@ -44,4 +54,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
