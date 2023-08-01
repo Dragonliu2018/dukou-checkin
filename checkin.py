@@ -6,14 +6,13 @@ from time import sleep
 
 def signin():
     # 设置Chrome浏览器选项
-    service = Service(executable_path=r'./chromedriver_linux64/chromedriver')
     options = webdriver.ChromeOptions()
     options.add_argument('--headless')
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
 
     # 创建Chrome浏览器实例
-    browser = webdriver.Chrome(service=service, options=options)
+    browser = webdriver.Chrome(options=options)
 
     # 登陆
     browser.implicitly_wait(20) # 如果找不到元素，每隔半秒钟再去界面上查看一次， 直到找到该元素， 或者过了20秒最大时长。
