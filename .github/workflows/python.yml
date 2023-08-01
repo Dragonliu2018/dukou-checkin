@@ -23,6 +23,10 @@ jobs:
       run: wget https://chromedriver.storage.googleapis.com/113.0.5672.63/chromedriver_linux64.zip
     - name: 'unzip chromedriver'
       run: unzip chromedriver_linux64.zip
+    - name: 'add to path'
+      run:
+        echo 'export PATH=$PATH:./chromedriver_linux64/chromedriver' >> ~/.bash_profile
+        source ~/.bash_profile
     - name: 'Install requirements'
       run: pip3 install selenium
     - name: Run dukou check-in script
