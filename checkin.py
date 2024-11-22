@@ -16,7 +16,7 @@ def signin():
 
     # 登陆
     browser.implicitly_wait(20) # 如果找不到元素，每隔半秒钟再去界面上查看一次， 直到找到该元素， 或者过了20秒最大时长。
-    url = 'https://dukou.dev/user/index' # 目标网站
+    url = 'https://flzt.top/user/index' # 目标网站
     browser.get(url)
     print("登陆成功")
     sleep(5)
